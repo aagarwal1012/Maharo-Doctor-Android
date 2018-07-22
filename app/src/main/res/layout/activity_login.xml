@@ -85,6 +85,6 @@
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="@android:color/white"
-        android:background="@drawable/signin_button_bg"/>
+        android:background="@drawable/orange_button_bg"/>
 
 </RelativeLayout>

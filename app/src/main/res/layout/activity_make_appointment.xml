@@ -3,28 +3,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:text="Make Appointment"
-            android:textSize="24sp"
-            android:padding="8dp"/>
-
-    </LinearLayout>
+    <include layout="@layout/app_toolbar"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="--Make an Appointment--"
+            android:layout_above="@id/appointment_form_fields"
+            android:gravity="center"
+            android:textSize="20sp"/>
 
         <LinearLayout
             android:id="@+id/appointment_form_fields"
@@ -177,7 +169,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/signin_button_bg"
+            android:background="@drawable/orange_button_bg"
             android:layout_below="@id/appointment_form_fields"
             android:text="Confirm Appointment"
             android:textAllCaps="false"
