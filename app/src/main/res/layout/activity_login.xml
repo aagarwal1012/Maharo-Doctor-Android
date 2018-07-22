@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context="in.ashutoshchaubey.maharodoctor.LoginActivity"
     android:fitsSystemWindows="true"
-    android:background="@drawable/sign_in_bg"
+    android:background="@drawable/sign_in_bg1"
     >
 
     <TextView

@@ -23,7 +23,9 @@
         <activity
             android:name=".MakeAppointmentActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".CurrentStatusActivity"></activity>
+        <activity android:name=".CurrentStatusActivity" />
+        <activity android:name=".PrescriptionsActivity" />
+        <activity android:name=".HistoryActivity"></activity>
     </application>
 
 </manifest>

@@ -19,5 +19,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.presc).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, PrescriptionsActivity.class));
+            }
+        });
+
+        findViewById(R.id.current_status).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, CurrentStatusActivity.class));
+            }
+        });
+
+        findViewById(R.id.history).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+            }
+        });
+
     }
 }

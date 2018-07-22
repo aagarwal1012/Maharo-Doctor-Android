@@ -120,6 +120,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/current_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -163,6 +164,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/presc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -256,6 +258,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/history"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
