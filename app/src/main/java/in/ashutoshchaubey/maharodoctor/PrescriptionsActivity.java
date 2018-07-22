@@ -32,6 +32,10 @@ public class PrescriptionsActivity extends AppCompatActivity implements medAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prescriptions);
 
+        Typeface lobster = Typeface.createFromAsset(getApplication().getAssets(), "fonts/lobster.otf");
+        TextView toolbarText = (TextView) findViewById(R.id.toolbar);
+        toolbarText.setTypeface(lobster);
+
         data.add(new medicine("Levo Cetrizine",new int[]{1,0,1,0},"lorem ipsum dolor sit amet"));
         data.add(new medicine("Cold syrup",new int[]{1,0,1,1},"lorem ipsum dolor sit amet"));
         RecyclerView medsRecyclerView = (RecyclerView) findViewById(R.id.prescriptions);
