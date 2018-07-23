@@ -1,4 +1,4 @@
-package in.ashutoshchaubey.maharodoctor;
+package in.ashutoshchaubey.maharodoctor.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -11,18 +11,21 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import in.ashutoshchaubey.maharodoctor.R;
+import in.ashutoshchaubey.maharodoctor.models.MedicineItem;
+
 /**
  * Created by ashutoshchaubey on 22/07/18.
  */
 
-public class medAdapter extends RecyclerView.Adapter<medAdapter.medViewHolder>{
+public class MedAdapter extends RecyclerView.Adapter<MedAdapter.medViewHolder>{
 
-    private ArrayList<medicine> data;
+    private ArrayList<MedicineItem> data;
     private ItemClickListener mClickListener;
     private LayoutInflater mInflater;
     private Context c;
 
-    public medAdapter(Context context, ArrayList<medicine> data) {
+    public MedAdapter(Context context, ArrayList<MedicineItem> data) {
         this.mInflater = LayoutInflater.from(context);
         this.data = data;
         this.c = context;
@@ -75,15 +78,15 @@ public class medAdapter extends RecyclerView.Adapter<medAdapter.medViewHolder>{
     }
 
     // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
-    public ArrayList<medicine> getData() {
+    public ArrayList<MedicineItem> getData() {
         return data;
     }
 
-    public void setData(ArrayList<medicine> mData) {
+    public void setData(ArrayList<MedicineItem> mData) {
         this.data = mData;
     }
 

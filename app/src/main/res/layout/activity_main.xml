@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="in.ashutoshchaubey.maharodoctor.MainActivity">
+    tools:context="in.ashutoshchaubey.maharodoctor.activities.MainActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +13,8 @@
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:elevation="2dp"
-        android:src="@mipmap/ic_launcher_round"
+        android:background="@android:color/white"
+        android:src="@drawable/ic_account_circle_black_24dp"
         app:civ_border_width="1dp"
         app:civ_border_color="#88000000"
         android:layout_alignParentEnd="true"

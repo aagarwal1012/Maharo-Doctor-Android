@@ -1,16 +1,16 @@
-package in.ashutoshchaubey.maharodoctor;
+package in.ashutoshchaubey.maharodoctor.models;
 
 /**
  * Created by ashutoshchaubey on 22/07/18.
  */
 
-public class medicine {
+public class MedicineItem {
 
     private String medicineName;
     private int[] dosage;
     private String medicineDescription;
 
-    public medicine(String name, int[] dosage, String desc){
+    public MedicineItem(String name, int[] dosage, String desc){
         medicineDescription = desc;
         this.dosage = dosage;
         medicineName = name;

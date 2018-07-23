@@ -6,17 +6,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.ashutoshchaubey.maharodoctor.LoginActivity"
+    tools:context="in.ashutoshchaubey.maharodoctor.activities.LoginActivity"
     android:fitsSystemWindows="true"
-    android:background="@drawable/sign_in_bg1"
-    >
+    android:background="@drawable/sign_in_bg1">
 
-    <!--<ImageView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:src="@drawable/sign_in_bg"-->
-    <!--android:scaleType="centerCrop"-->
-    <!--android:alpha="1"/>-->
 
 
     <LinearLayout
@@ -39,9 +32,50 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:src="@drawable/ic_uname"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="User name"
+                android:textColorHint="@android:color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_id"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:textColorHint="@android:color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/ic_mail"/>
 
             <EditText
+                android:id="@+id/email_address"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package in.ashutoshchaubey.maharodoctor;
+package in.ashutoshchaubey.maharodoctor.activities;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+
+import in.ashutoshchaubey.maharodoctor.R;
 
 public class MakeAppointmentActivity extends AppCompatActivity{
 

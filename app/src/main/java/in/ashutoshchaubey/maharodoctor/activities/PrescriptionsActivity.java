@@ -1,31 +1,26 @@
-package in.ashutoshchaubey.maharodoctor;
+package in.ashutoshchaubey.maharodoctor.activities;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class PrescriptionsActivity extends AppCompatActivity implements medAdapter.ItemClickListener {
+import in.ashutoshchaubey.maharodoctor.R;
+import in.ashutoshchaubey.maharodoctor.adapters.MedAdapter;
+import in.ashutoshchaubey.maharodoctor.models.MedicineItem;
 
-    medAdapter adapter;
-    ArrayList<medicine> data = new ArrayList<>();
+public class PrescriptionsActivity extends AppCompatActivity implements MedAdapter.ItemClickListener {
+
+    MedAdapter adapter;
+    ArrayList<MedicineItem> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +31,11 @@ public class PrescriptionsActivity extends AppCompatActivity implements medAdapt
         TextView toolbarText = (TextView) findViewById(R.id.toolbar);
         toolbarText.setTypeface(lobster);
 
-        data.add(new medicine("Levo Cetrizine",new int[]{1,0,1,0},"lorem ipsum dolor sit amet"));
-        data.add(new medicine("Cold syrup",new int[]{1,0,1,1},"lorem ipsum dolor sit amet"));
+        data.add(new MedicineItem("Levo Cetrizine",new int[]{1,0,1,0},"lorem ipsum dolor sit amet"));
+        data.add(new MedicineItem("Cold syrup",new int[]{1,0,1,1},"lorem ipsum dolor sit amet"));
         RecyclerView medsRecyclerView = (RecyclerView) findViewById(R.id.prescriptions);
         medsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new medAdapter(this, data);
+        adapter = new MedAdapter(this, data);
         adapter.setClickListener(this);
         medsRecyclerView.setAdapter(adapter);
 

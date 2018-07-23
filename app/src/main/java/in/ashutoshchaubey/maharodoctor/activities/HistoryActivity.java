@@ -1,4 +1,4 @@
-package in.ashutoshchaubey.maharodoctor;
+package in.ashutoshchaubey.maharodoctor.activities;
 
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +10,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class HistoryActivity extends AppCompatActivity implements medAdapter.ItemClickListener {
+import in.ashutoshchaubey.maharodoctor.R;
+import in.ashutoshchaubey.maharodoctor.adapters.AppointmentAdapter;
+import in.ashutoshchaubey.maharodoctor.adapters.MedAdapter;
+import in.ashutoshchaubey.maharodoctor.models.AppointmentItem;
 
-    ArrayList<appointment> data;
-    appointmentAdapter adapter;
+public class HistoryActivity extends AppCompatActivity implements MedAdapter.ItemClickListener {
+
+    ArrayList<AppointmentItem> data;
+    AppointmentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +31,17 @@ public class HistoryActivity extends AppCompatActivity implements medAdapter.Ite
 
         RecyclerView appRecView = (RecyclerView) findViewById(R.id.appointment_list);
         data = new ArrayList<>();
-        data.add(new appointment(12,0,23, 7, 2018, 23123, "Dr. Shalini Kapoor",
+        data.add(new AppointmentItem(12,0,23, 7, 2018, 23123, "Dr. Shalini Kapoor",
                 "Arora Meds", "Bikaner", "Approved"));
-        data.add(new appointment(12,0,23, 7, 2018, 23123, "Dr. Shalini Kapoor",
+        data.add(new AppointmentItem(12,0,23, 7, 2018, 23123, "Dr. Shalini Kapoor",
                 "Arora Meds", "Bikaner", "Pending"));
-        data.add(new appointment(12,0,23, 7, 2018, 23123, "Dr. Shalini Kapoor",
+        data.add(new AppointmentItem(12,0,23, 7, 2018, 23123, "Dr. Shalini Kapoor",
                 "Arora Meds", "Bikaner", "Not Approved"));
-        data.add(new appointment(12,0,23, 7, 2018, 23123, "Dr. Shalini Kapoor",
+        data.add(new AppointmentItem(12,0,23, 7, 2018, 23123, "Dr. Shalini Kapoor",
                 "Arora Meds", "Bikaner", "Approved"));
-        data.add(new appointment(12,0,23, 7, 2018, 23123, "Dr. Shalini Kapoor",
+        data.add(new AppointmentItem(12,0,23, 7, 2018, 23123, "Dr. Shalini Kapoor",
                 "Arora Meds", "Bikaner", "Completed"));
-        adapter = new appointmentAdapter(this, data);
+        adapter = new AppointmentAdapter(this, data);
         appRecView.setLayoutManager(new LinearLayoutManager(this));
         adapter.setClickListener(this);
         appRecView.setAdapter(adapter);

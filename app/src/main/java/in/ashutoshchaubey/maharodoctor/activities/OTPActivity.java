@@ -1,16 +1,18 @@
-package in.ashutoshchaubey.maharodoctor;
+package in.ashutoshchaubey.maharodoctor.activities;
 
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class CurrentStatusActivity extends AppCompatActivity {
+import in.ashutoshchaubey.maharodoctor.R;
+
+public class OTPActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current_status);
+        setContentView(R.layout.activity_otp);
 
         Typeface lobster = Typeface.createFromAsset(getApplication().getAssets(), "fonts/lobster.otf");
         TextView toolbarText = (TextView) findViewById(R.id.toolbar);
