@@ -1,4 +1,4 @@
-package in.ashutoshchaubey.maharodoctor.Models.GetAppointmentData.Input;
+package in.ashutoshchaubey.maharodoctor.models.getAppointmentData.Input;
 
 public class GetAppointmentDataInput {
     String appointmentId;

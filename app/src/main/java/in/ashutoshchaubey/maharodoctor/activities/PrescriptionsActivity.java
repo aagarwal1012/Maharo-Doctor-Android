@@ -54,7 +54,7 @@ public class PrescriptionsActivity extends AppCompatActivity implements MedAdapt
                 .setMessage(data.get(position).getMedicineDescription())
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete MMLL
+                        // continue with delete
                     }
                 })
                 .show();

@@ -1,7 +1,6 @@
-package in.ashutoshchaubey.maharodoctor.Models.GetAppointmentData;
+package in.ashutoshchaubey.maharodoctor.models.getAppointmentData;
 
-import in.ashutoshchaubey.maharodoctor.Models.GetAppointmentData.Output.GetAppointmentDataOutput;
-import in.ashutoshchaubey.maharodoctor.Models.Login.Output.OutputLogin;
+import in.ashutoshchaubey.maharodoctor.models.getAppointmentData.Output.GetAppointmentDataOutput;
 import retrofit.http.POST;
 import retrofit.http.Query;
 import retrofit2.Call;

@@ -1,10 +1,27 @@
-package in.ashutoshchaubey.maharodoctor.Models.Login.Output;
+package in.ashutoshchaubey.maharodoctor.models.login.Output;
 
 public class OutputLogin {
 
     String status;
     String message;
     Boolean is_doctor;
+    String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public OutputLogin(String status, String message, Boolean is_doctor, String token) {
+
+        this.status = status;
+        this.message = message;
+        this.is_doctor = is_doctor;
+        this.token = token;
+    }
 
     public String getStatus() {
         return status;

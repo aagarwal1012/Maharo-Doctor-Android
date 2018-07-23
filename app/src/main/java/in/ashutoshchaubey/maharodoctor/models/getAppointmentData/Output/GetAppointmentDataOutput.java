@@ -1,4 +1,4 @@
-package in.ashutoshchaubey.maharodoctor.Models.GetAppointmentData.Output;
+package in.ashutoshchaubey.maharodoctor.models.getAppointmentData.Output;
 
 public class GetAppointmentDataOutput {
 

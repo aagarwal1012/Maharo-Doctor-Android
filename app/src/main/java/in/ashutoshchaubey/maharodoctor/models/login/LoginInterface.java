@@ -1,6 +1,6 @@
-package in.ashutoshchaubey.maharodoctor.Models.Login;
+package in.ashutoshchaubey.maharodoctor.models.login;
 
-import in.ashutoshchaubey.maharodoctor.Models.Login.Output.OutputLogin;
+import in.ashutoshchaubey.maharodoctor.models.login.Output.OutputLogin;
 import retrofit.http.POST;
 import retrofit.http.Query;
 import retrofit2.Call;

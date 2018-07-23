@@ -55,6 +55,7 @@
                 android:src="@drawable/ic_password"/>
 
             <EditText
+                android:id="@+id/otp_edit_text"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -67,7 +68,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_sign_in"
+        android:id="@+id/confirm_otp_button"
         android:layout_below="@id/email_pw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

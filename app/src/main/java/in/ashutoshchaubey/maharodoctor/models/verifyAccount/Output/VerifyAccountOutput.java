@@ -1,11 +1,11 @@
-package in.ashutoshchaubey.maharodoctor.Models.Logout.Output;
+package in.ashutoshchaubey.maharodoctor.models.verifyAccount.Output;
 
-public class LogoutOutput {
+public class VerifyAccountOutput {
 
-    String status;
-    String message;
+    private String status;
+    private String message;
 
-    public LogoutOutput(String status, String message) {
+    public VerifyAccountOutput(String status, String message) {
         this.status = status;
         this.message = message;
     }

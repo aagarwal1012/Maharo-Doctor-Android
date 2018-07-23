@@ -1,4 +1,4 @@
-package in.ashutoshchaubey.maharodoctor.Models.Login.Input;
+package in.ashutoshchaubey.maharodoctor.models.login.Input;
 
 public class LoginInput {
 
