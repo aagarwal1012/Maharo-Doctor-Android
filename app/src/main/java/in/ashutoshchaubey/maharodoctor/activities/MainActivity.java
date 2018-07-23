@@ -1,9 +1,11 @@
-package in.ashutoshchaubey.maharodoctor;
+package in.ashutoshchaubey.maharodoctor.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import in.ashutoshchaubey.maharodoctor.R;
 
 public class MainActivity extends AppCompatActivity {
 

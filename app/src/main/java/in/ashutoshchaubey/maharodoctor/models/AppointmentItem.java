@@ -1,10 +1,10 @@
-package in.ashutoshchaubey.maharodoctor;
+package in.ashutoshchaubey.maharodoctor.models;
 
 /**
  * Created by ashutoshchaubey on 23/07/18.
  */
 
-public class appointment {
+public class AppointmentItem {
 
     private int hour, minute, dd, mm, yyyy, id;
     private String docName, clinicName, cityName, status;
@@ -89,7 +89,7 @@ public class appointment {
         this.status = status;
     }
 
-    public appointment(int hour, int minute, int dd, int mm, int yyyy, int id, String docName, String clinicName, String cityName, String status) {
+    public AppointmentItem(int hour, int minute, int dd, int mm, int yyyy, int id, String docName, String clinicName, String cityName, String status) {
 
         this.hour = hour;
         this.minute = minute;

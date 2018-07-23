@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,15 +19,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:theme="@style/SigninTheme" />
-        <activity android:name=".SignInActivity" />
+        <activity android:name=".activities.SignUpActivity" />
         <activity
-            android:name=".MakeAppointmentActivity"
+            android:name=".activities.MakeAppointmentActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".CurrentStatusActivity" />
-        <activity android:name=".PrescriptionsActivity" />
-        <activity android:name=".HistoryActivity"></activity>
+        <activity android:name=".activities.CurrentStatusActivity" />
+        <activity android:name=".activities.PrescriptionsActivity" />
+        <activity android:name=".activities.HistoryActivity" />
+        <activity android:name=".activities.OTPActivity" />
+        <activity android:name=".activities.ProfileActivity"></activity>
     </application>
 
 </manifest>
