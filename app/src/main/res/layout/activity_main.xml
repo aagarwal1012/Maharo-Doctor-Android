@@ -7,12 +7,25 @@
     android:background="@android:color/white"
     tools:context="in.ashutoshchaubey.maharodoctor.MainActivity">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:elevation="2dp"
+        android:src="@mipmap/ic_launcher_round"
+        app:civ_border_width="1dp"
+        app:civ_border_color="#88000000"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="8dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
 
 
         <RelativeLayout
@@ -107,6 +120,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/current_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -150,6 +164,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/presc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -243,6 +258,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/history"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -291,10 +307,12 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:id="@+id/fab_make_appointment"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:src="@drawable/ic_add"
         app:backgroundTint="#F4511E"
+        android:elevation="4dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
 

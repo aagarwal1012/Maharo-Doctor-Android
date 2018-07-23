@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context="in.ashutoshchaubey.maharodoctor.LoginActivity"
     android:fitsSystemWindows="true"
-    android:background="@drawable/sign_in_bg"
+    android:background="@drawable/sign_in_bg1"
     >
 
     <!--<ImageView-->
@@ -144,6 +144,6 @@
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="@android:color/white"
-        android:background="@drawable/signin_button_bg"/>
+        android:background="@drawable/orange_button_bg"/>
 
 </RelativeLayout>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/app_toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="--Make an Appointment--"
+            android:layout_above="@id/appointment_form_fields"
+            android:gravity="center"
+            android:textSize="20sp"/>
+
+        <LinearLayout
+            android:id="@+id/appointment_form_fields"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_background"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="City"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/black"/>
+
+                <Spinner
+                    android:id="@+id/city_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"></Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Clinic"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/black"/>
+
+                <Spinner
+                    android:id="@+id/clinic_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"></Spinner>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Doctor"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/black"/>
+
+                <Spinner
+                    android:id="@+id/doctor_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"></Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/black"/>
+
+                <EditText
+                    android:id="@+id/appointment_date"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/black"
+                    android:text="Select date"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/date_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_red_dark"
+                android:gravity="end"
+                android:visibility="gone"
+                android:text="Select a valid date"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Time"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/black"/>
+
+                <EditText
+                    android:id="@+id/appointment_time"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Select time"
+                    android:textColor="@android:color/black"/>
+
+            </LinearLayout>
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/time_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_red_dark"
+                android:gravity="end"
+                android:text="Select a valid time between 10:00 to 20:59"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/orange_button_bg"
+            android:layout_below="@id/appointment_form_fields"
+            android:text="Confirm Appointment"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:layout_margin="8dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

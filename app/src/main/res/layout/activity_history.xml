@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="in.ashutoshchaubey.maharodoctor.HistoryActivity">
+
+    <include layout="@layout/app_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:padding="12dp"
+            android:background="#B3E5FC"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/appointment_list"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded_background"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>
