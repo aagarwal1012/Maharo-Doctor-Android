@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static in.ashutoshchaubey.maharodoctor.Constants.API_URL;
 import static in.ashutoshchaubey.maharodoctor.Constants.USER_ID;
+import static in.ashutoshchaubey.maharodoctor.Constants.getRetrofit;
 
 public class OTPActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,7 +46,12 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
         TextView toolbarText = (TextView) findViewById(R.id.toolbar);
         toolbarText.setTypeface(lobster);
 
-        username = getIntent().getExtras().getString(USER_ID);
+        try{
+            username = getIntent().getExtras().getString(USER_ID);
+        }
+        catch (Exception e){
+            Log.e("Error :", e.toString());
+        }
 
         otp = (EditText) findViewById(R.id.otp_edit_text);
 
@@ -59,25 +65,20 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.otp_edit_text) {
+        if (view.getId() == R.id.confirm_otp_button) {
             if (otp.getText() != null) {
                 progressDialog.setTitle("Confirming OTP");
                 progressDialog.setMessage("Loading ...");
                 progressDialog.show();
 
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(API_URL)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                VerifyAccountInterface verifyAccountInterface = retrofit.create(VerifyAccountInterface.class);
+                VerifyAccountInterface verifyAccountInterface = getRetrofit().create(VerifyAccountInterface.class);
 
                 Call<VerifyAccountOutput> call = verifyAccountInterface.getResult(username, otp.getText().toString());
 
                 call.enqueue(new Callback<VerifyAccountOutput>() {
                     @Override
                     public void onResponse(Call<VerifyAccountOutput> call, Response<VerifyAccountOutput> response) {
-                        if (response.body().getStatus() == "ok") {
+                        if (response.body().getStatus().equals("ok")) {
                             AlertDialog.Builder builder;
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                 builder = new AlertDialog.Builder(OTPActivity.this, AlertDialog.THEME_HOLO_LIGHT);
@@ -88,7 +89,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
                                     .setMessage("Please go to login page...")
                                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent = new Intent(OTPActivity.this, OTPActivity.class);
+                                            Intent intent = new Intent(OTPActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                         }
                                     })

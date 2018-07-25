@@ -6,6 +6,7 @@ public class OutputLogin {
     String message;
     Boolean is_doctor;
     String token;
+    String euid;
 
     public String getToken() {
         return token;
@@ -15,12 +16,12 @@ public class OutputLogin {
         this.token = token;
     }
 
-    public OutputLogin(String status, String message, Boolean is_doctor, String token) {
+    public String getEuid() {
+        return euid;
+    }
 
-        this.status = status;
-        this.message = message;
-        this.is_doctor = is_doctor;
-        this.token = token;
+    public void setEuid(String euid) {
+        this.euid = euid;
     }
 
     public String getStatus() {

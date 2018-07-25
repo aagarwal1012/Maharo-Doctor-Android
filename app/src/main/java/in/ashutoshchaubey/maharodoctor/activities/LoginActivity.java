@@ -20,14 +20,12 @@ import in.ashutoshchaubey.maharodoctor.models.login.Output.OutputLogin;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-import static in.ashutoshchaubey.maharodoctor.Constants.API_URL;
+import static in.ashutoshchaubey.maharodoctor.Constants.EUID;
 import static in.ashutoshchaubey.maharodoctor.Constants.IS_LOGGED_IN;
 import static in.ashutoshchaubey.maharodoctor.Constants.SHARED_PREFERENCES;
-import static in.ashutoshchaubey.maharodoctor.Constants.TOKEN;
 import static in.ashutoshchaubey.maharodoctor.Constants.USER_ID;
+import static in.ashutoshchaubey.maharodoctor.Constants.getRetrofit;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -76,28 +74,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 progressDialog.setMessage("Loading ...");
                 progressDialog.show();
 
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(API_URL)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                LoginInterface loginInterface = retrofit.create(LoginInterface.class);
+                LoginInterface loginInterface = getRetrofit().create(LoginInterface.class);
 
                 Call<OutputLogin> call = loginInterface.getResult(userName.getText().toString(), password.getText().toString());
                 call.enqueue(new Callback<OutputLogin>() {
                     @Override
                     public void onResponse(Call<OutputLogin> call, Response<OutputLogin> response) {
 
+                        Log.d("Response Login " , "Status : " + response.body().getStatus() + ", Message : " + response.body().getMessage() + ", EUid : " + response.body().getEuid());
                         progressDialog.dismiss();
 
-                        if (response.body().getStatus() == "ok") {
+                        if (response.body().getStatus().equals("ok")) {
                             OutputLogin outputLogin = response.body();
 
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG);
 
                             sharedPreferences.edit().putBoolean(IS_LOGGED_IN, true);
                             sharedPreferences.edit().putString(USER_ID, userName.getText().toString());
-                            sharedPreferences.edit().putString(TOKEN, outputLogin.getToken());
+                            sharedPreferences.edit().putString(EUID, outputLogin.getEuid());
 
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
