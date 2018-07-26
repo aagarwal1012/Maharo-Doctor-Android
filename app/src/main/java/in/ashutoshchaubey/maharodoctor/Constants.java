@@ -8,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Constants {
 
     public static final String API_URL = "http://178.128.111.216:1807/api/";
+    public static final int SPLASH_DISPLAY_LENGTH = 1000;
     public static final String EUID = "euid";
     public static final String USER_ID = "userId";
     public static final String SHARED_PREFERENCES = "userInfo";

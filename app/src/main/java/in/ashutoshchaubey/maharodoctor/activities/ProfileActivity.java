@@ -19,6 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static in.ashutoshchaubey.maharodoctor.Constants.EUID;
+import static in.ashutoshchaubey.maharodoctor.Constants.IS_LOGGED_IN;
 import static in.ashutoshchaubey.maharodoctor.Constants.SHARED_PREFERENCES;
 import static in.ashutoshchaubey.maharodoctor.Constants.USER_ID;
 import static in.ashutoshchaubey.maharodoctor.Constants.getRetrofit;
@@ -89,6 +90,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.logout_profile){
+            sharedPreferences.edit().putBoolean(IS_LOGGED_IN, false).commit();
             startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
         }
     }
