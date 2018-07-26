@@ -31,4 +31,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     compile 'com.android.support:design:26.1.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    // retrofit, gson
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.okhttp3:okhttp:3.9.1'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.jakewharton.retrofit:retrofit1-okhttp3-client:1.0.2'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 }

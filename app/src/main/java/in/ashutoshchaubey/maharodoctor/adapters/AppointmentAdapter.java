@@ -1,10 +1,8 @@
-package in.ashutoshchaubey.maharodoctor;
+package in.ashutoshchaubey.maharodoctor.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,43 +10,51 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import in.ashutoshchaubey.maharodoctor.R;
+import in.ashutoshchaubey.maharodoctor.models.AppointmentItem;
+
 /**
  * Created by ashutoshchaubey on 23/07/18.
  */
 
-public class appointmentAdapter extends RecyclerView.Adapter<appointmentAdapter.appointViewHolder> {
+public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.appointViewHolder> {
 
-    private ArrayList<appointment> data;
-    private medAdapter.ItemClickListener mClickListener;
+    private ArrayList<AppointmentItem> data;
+    private MedAdapter.ItemClickListener mClickListener;
     private LayoutInflater mInflater;
     private Context c;
     private String[] months = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
     "Nov", "Dec"};
 
-    public appointmentAdapter(Context context, ArrayList<appointment> data) {
+    public AppointmentAdapter(Context context, ArrayList<AppointmentItem> data) {
         this.mInflater = LayoutInflater.from(context);
         this.data = data;
         this.c = context;
     }
 
     @Override
-    public appointmentAdapter.appointViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AppointmentAdapter.appointViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.appointment_item,parent,false);
-        return new appointmentAdapter.appointViewHolder(view);
+        return new AppointmentAdapter.appointViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(appointmentAdapter.appointViewHolder holder, int position) {
-        holder.date.setText(data.get(position).getDd() +" "+ months[data.get(position).getMm()-1] +", "+ data.get(position).getYyyy());
-        holder.time.setText(data.get(position).getHour()+":"+data.get(position).getMinute()+" hrs");
+    public void onBindViewHolder(AppointmentAdapter.appointViewHolder holder, int position) {
+        if (data.get(position).getMm() != null){
+            holder.date.setText(data.get(position).getDd() +" "+ data.get(position).getMm() +", "+ data.get(position).getYyyy());
+            holder.time.setText(data.get(position).getHour()+":"+data.get(position).getMinute()+" hrs");
+        }
+        else {
+            holder.date.setText("None");
+            holder.time.setText("None");
+        }
         holder.docName.setText(data.get(position).getDocName());
-        holder.clinic.setText(data.get(position).getClinicName()+", "+data.get(position).getCityName());
         holder.status.setText(data.get(position).getStatus());
         if (data.get(position).getStatus().equals("Pending")){
             holder.status.setBackgroundColor(Color.parseColor("#FFEE58"));
-        }else if(data.get(position).getStatus().equals("Approved")){
+        }else if(data.get(position).getStatus().equals("Verified")){
             holder.status.setBackgroundColor(Color.parseColor("#76FF03"));
-        }else if (data.get(position).getStatus().equals("Not Approved")){
+        }else if (data.get(position).getStatus().equals("Not Verified")){
             holder.status.setBackgroundColor(Color.parseColor("#EF5350"));
         }else{
             holder.status.setBackgroundColor(Color.parseColor("#26C6DA"));
@@ -71,7 +77,6 @@ public class appointmentAdapter extends RecyclerView.Adapter<appointmentAdapter.
             time = (TextView) itemView.findViewById(R.id.appointment_time);
             status = (TextView) itemView.findViewById(R.id.status);
             docName = (TextView) itemView.findViewById(R.id.doc_name);
-            clinic = (TextView) itemView.findViewById(R.id.clin_name);
 
             itemView.setOnClickListener(this);
         }
@@ -89,15 +94,15 @@ public class appointmentAdapter extends RecyclerView.Adapter<appointmentAdapter.
     }
 
     // allows clicks events to be caught
-    void setClickListener(medAdapter.ItemClickListener itemClickListener) {
+    public void setClickListener(MedAdapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
-    public ArrayList<appointment> getData() {
+    public ArrayList<AppointmentItem> getData() {
         return data;
     }
 
-    public void setData(ArrayList<appointment> mData) {
+    public void setData(ArrayList<AppointmentItem> mData) {
         this.data = mData;
     }
 }

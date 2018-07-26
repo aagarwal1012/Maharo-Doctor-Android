@@ -1,4 +1,4 @@
-package in.ashutoshchaubey.maharodoctor;
+package in.ashutoshchaubey.maharodoctor.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -11,22 +11,20 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by ashutoshchaubey on 22/07/18.
- */
+import in.ashutoshchaubey.maharodoctor.R;
+import in.ashutoshchaubey.maharodoctor.models.MedicineItem;
 
-public class medAdapter extends RecyclerView.Adapter<medAdapter.medViewHolder>{
+public class MedAdapter extends RecyclerView.Adapter<MedAdapter.medViewHolder>{
 
-    private ArrayList<medicine> data;
+    private ArrayList<MedicineItem> data;
     private ItemClickListener mClickListener;
     private LayoutInflater mInflater;
     private Context c;
 
-    public medAdapter(Context context, ArrayList<medicine> data) {
+    public MedAdapter(Context context, ArrayList<MedicineItem> data) {
         this.mInflater = LayoutInflater.from(context);
         this.data = data;
         this.c = context;
-        Log.e("adshgashdjbjhasdb","CNSTR");
     }
 
     @Override
@@ -38,9 +36,8 @@ public class medAdapter extends RecyclerView.Adapter<medAdapter.medViewHolder>{
     @Override
     public void onBindViewHolder(medViewHolder holder, int position) {
         holder.medName.setText(data.get(position).getMedicineName());
-        int[] dosage = data.get(position).getDosage();
-        String str = dosage[0] + "-" + dosage[1] + "-" + dosage[2] + "-" + dosage[3];
-        holder.medDosage.setText(str);
+        holder.quantity.setText(data.get(position).getQuantity());
+        holder.days.setText(data.get(position).getDays());
     }
 
     @Override
@@ -49,15 +46,15 @@ public class medAdapter extends RecyclerView.Adapter<medAdapter.medViewHolder>{
     }
 
     public class medViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView medName;
-        TextView medDosage;
+        TextView medName, quantity, days;
 
         public medViewHolder(View itemView) {
             super(itemView);
             Typeface ab = Typeface.createFromAsset(c.getAssets(), "fonts/AlexBrush.ttf");
 
-            medName = (TextView) itemView.findViewById(R.id.med_name);
-            medDosage = (TextView) itemView.findViewById(R.id.med_dosage);
+            medName = (TextView) itemView.findViewById(R.id.medicine_name);
+            quantity = (TextView) itemView.findViewById(R.id.quantity_medicine_dosage);
+            days = (TextView) itemView.findViewById(R.id.days_medicine_item);
             medName.setTypeface(ab);
             itemView.setOnClickListener(this);
         }
@@ -75,15 +72,15 @@ public class medAdapter extends RecyclerView.Adapter<medAdapter.medViewHolder>{
     }
 
     // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
-    public ArrayList<medicine> getData() {
+    public ArrayList<MedicineItem> getData() {
         return data;
     }
 
-    public void setData(ArrayList<medicine> mData) {
+    public void setData(ArrayList<MedicineItem> mData) {
         this.data = mData;
     }
 

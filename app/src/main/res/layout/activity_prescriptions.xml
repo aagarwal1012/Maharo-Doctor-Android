@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="in.ashutoshchaubey.maharodoctor.PrescriptionsActivity">
+    tools:context="in.ashutoshchaubey.maharodoctor.activities.PrescriptionsActivity">
 
-    <include layout="@layout/app_toolbar"/>
+    <include layout="@layout/app_toolbar" />
 
-    <LinearLayout
+    <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -50,63 +50,62 @@
 
 
 
-        </LinearLayout>
+        </LinearLayout> -->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="#88000000"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="#88000000" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/prescriptions"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_background"
-            android:layout_margin="8dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/prescriptions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_background" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="#88000000"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="#88000000" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Remarks"
+            android:textColor="#bb000000"
+            android:textSize="18sp" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Remarks"
-                android:gravity="center"
-                android:padding="8dp"
-                android:textColor="#bb000000"
-                android:textSize="18sp"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:background="#bb000000" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="56dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:background="#bb000000"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="wrap_content"
-                android:text="Patient has to remove clothes at night while sleeping with me"
-                android:padding="8dp"
-                android:textColor="#000000"
-                android:textSize="18sp"/>
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/remarks_prescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="8dp"
+            android:text="Patient has to remove clothes at night while sleeping with me"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
