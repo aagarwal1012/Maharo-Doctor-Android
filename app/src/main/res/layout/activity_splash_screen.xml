@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_centerInParent="true"
     android:fitsSystemWindows="true"
-    tools:context=".activities.SplashScreen"
+    tools:context="in.ayush.mharodoctor.activities.SplashScreen"
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView

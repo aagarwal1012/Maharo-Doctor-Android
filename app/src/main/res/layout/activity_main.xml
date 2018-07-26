@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="in.ashutoshchaubey.maharodoctor.activities.MainActivity">
+    tools:context="in.ayush.mharodoctor.in.ayush.mharodoctor.activities.MainActivity">
 
     <Button
         android:id="@+id/emergency_button"

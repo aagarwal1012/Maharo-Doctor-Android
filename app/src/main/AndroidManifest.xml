@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.ashutoshchaubey.maharodoctor">
+    package="in.ayush.mharodoctor">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,20 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name="in.ayush.mharodoctor.activities.MainActivity"></activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name="in.ayush.mharodoctor.activities.LoginActivity"
             android:theme="@style/SigninTheme"/>
-        <activity android:name=".activities.SignUpActivity" />
+        <activity android:name="in.ayush.mharodoctor.activities.SignUpActivity" />
         <activity
-            android:name=".activities.MakeAppointmentActivity"
+            android:name="in.ayush.mharodoctor.activities.MakeAppointmentActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".activities.CurrentStatusActivity" />
-        <activity android:name=".activities.PrescriptionsActivity" />
-        <activity android:name=".activities.HistoryActivity" />
-        <activity android:name=".activities.OTPActivity" />
-        <activity android:name=".activities.ProfileActivity" />
-        <activity android:name=".activities.SplashScreen">
+        <activity android:name="in.ayush.mharodoctor.activities.CurrentStatusActivity" />
+        <activity android:name="in.ayush.mharodoctor.activities.PrescriptionsActivity" />
+        <activity android:name="in.ayush.mharodoctor.activities.HistoryActivity" />
+        <activity android:name="in.ayush.mharodoctor.activities.OTPActivity" />
+        <activity android:name="in.ayush.mharodoctor.activities.ProfileActivity" />
+        <activity android:name="in.ayush.mharodoctor.activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.ashutoshchaubey.maharodoctor.activities.LoginActivity"
+    tools:context="in.ayush.mharodoctor.in.ayush.mharodoctor.activities.LoginActivity"
     android:fitsSystemWindows="true"
     android:background="@drawable/sign_in_bg1"
     >
