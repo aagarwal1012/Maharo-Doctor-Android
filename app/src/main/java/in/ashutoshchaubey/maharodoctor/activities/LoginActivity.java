@@ -89,9 +89,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG);
 
-                            sharedPreferences.edit().putBoolean(IS_LOGGED_IN, true);
-                            sharedPreferences.edit().putString(USER_ID, userName.getText().toString());
-                            sharedPreferences.edit().putString(EUID, outputLogin.getEuid());
+                            sharedPreferences.edit().putBoolean(IS_LOGGED_IN, true).commit();
+                            sharedPreferences.edit().putString(USER_ID, userName.getText().toString()).commit();
+                            sharedPreferences.edit().putString(EUID, outputLogin.getEuid()).commit();
 
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
 

@@ -28,7 +28,7 @@
             android:orientation="vertical"
             android:background="@drawable/rounded_background"
             >
-
+<!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"></Spinner>
 
-            </LinearLayout>
+            </LinearLayout> -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                     android:textColor="@android:color/black"/>
 
                 <Spinner
-                    android:id="@+id/doctor_name"
+                    android:id="@+id/doctor_name_spinnner"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                 android:visibility="gone"
                 android:text="Select a valid date"/>
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -163,10 +163,11 @@
                 android:textColor="@android:color/holo_red_dark"
                 android:gravity="end"
                 android:text="Select a valid time between 10:00 to 20:59"/>
-
+-->
         </LinearLayout>
 
         <Button
+            android:id="@+id/confirm_appointment_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/orange_button_bg"

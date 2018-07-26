@@ -9,15 +9,16 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image"
+        android:id="@+id/profile_image_main_activity"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:elevation="2dp"
         android:background="@android:color/white"
-        android:src="@drawable/ic_account_circle_black_24dp"
+        android:src="@drawable/pro_pic"
         app:civ_border_width="1dp"
         app:civ_border_color="#88000000"
         android:layout_alignParentEnd="true"
+        android:clickable="true"
         android:layout_margin="8dp"/>
 
     <LinearLayout
@@ -38,27 +39,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/user_name"
+                android:layout_above="@id/first_name_main_activity"
                 android:fontFamily="casual"
                 android:text="Hello"
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/user_name"
+                android:id="@+id/first_name_main_activity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/todays_date"
+                android:layout_above="@id/todays_date_main_activity"
                 android:fontFamily="casual"
-                android:text="Ashutosh"
                 android:textColor="@android:color/black"
                 android:textSize="40sp" />
 
             <TextView
-                android:id="@+id/todays_date"
+                android:id="@+id/todays_date_main_activity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:text="22nd July, 2018" />
+                android:text="27th July, 2018" />
 
         </RelativeLayout>
 
@@ -77,16 +77,16 @@
                 android:padding="8dp">
 
                 <TextView
+                    android:id="@+id/_number_of_verified_main_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_size_number" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pending"
+                    android:text="Verified"
                     android:textColor="@android:color/black" />
             </LinearLayout>
 
@@ -100,16 +100,16 @@
                 android:padding="8dp">
 
                 <TextView
+                    android:id="@+id/number_of_not_verified_main_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_size_number" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pending"
+                    android:text="Not Verified"
                     android:textColor="@android:color/black" />
             </LinearLayout>
 
@@ -121,7 +121,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/current_status"
+                android:id="@+id/current_status_linear_layout_main_activity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -155,9 +155,9 @@
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/current_status_main_activity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Active"
                         android:textColor="@android:color/black"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -165,7 +165,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/presc"
+                android:id="@+id/prescription_linear_layout_main_activity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -199,9 +199,9 @@
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/current_prescriptions_main_activity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4 Total"
                         android:textColor="@android:color/black"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -211,6 +211,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/pricing_linear_layout_main_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -239,12 +240,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="start"
+                    android:clickable="true"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pricings"
+                        android:text="Pricing"
                         android:textColor="@android:color/black"
                         android:textSize="17sp" />
 
@@ -259,7 +261,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/history"
+                android:id="@+id/history_linear_layout_main_activity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -293,9 +295,9 @@
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/history_main_activity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="8 Applications"
                         android:textColor="@android:color/black"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -308,7 +310,7 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_make_appointment"
+        android:id="@+id/fab_make_appointment_main_activity"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:src="@drawable/ic_add"

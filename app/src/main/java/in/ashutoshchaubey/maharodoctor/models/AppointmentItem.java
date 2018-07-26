@@ -1,13 +1,9 @@
 package in.ashutoshchaubey.maharodoctor.models;
 
-/**
- * Created by ashutoshchaubey on 23/07/18.
- */
-
 public class AppointmentItem {
 
-    private int hour, minute, dd, mm, yyyy, id;
-    private String docName, clinicName, cityName, status;
+    private int hour, minute, dd, yyyy, id;
+    private String docName, status, mm;
 
     public int getHour() {
         return hour;
@@ -33,11 +29,11 @@ public class AppointmentItem {
         this.dd = dd;
     }
 
-    public int getMm() {
+    public String getMm() {
         return mm;
     }
 
-    public void setMm(int mm) {
+    public void setMm(String mm) {
         this.mm = mm;
     }
 
@@ -65,22 +61,6 @@ public class AppointmentItem {
         this.docName = docName;
     }
 
-    public String getClinicName() {
-        return clinicName;
-    }
-
-    public void setClinicName(String clinicName) {
-        this.clinicName = clinicName;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -89,17 +69,17 @@ public class AppointmentItem {
         this.status = status;
     }
 
-    public AppointmentItem(int hour, int minute, int dd, int mm, int yyyy, int id, String docName, String clinicName, String cityName, String status) {
+    public AppointmentItem(String time, int id, String docName, String status) {
 
-        this.hour = hour;
-        this.minute = minute;
-        this.dd = dd;
-        this.mm = mm;
-        this.yyyy = yyyy;
+        if (time != null){
+            this.hour = Integer.parseInt(time.substring(16, 18));
+            this.minute = Integer.parseInt(time.substring(19, 21));
+            this.dd = Integer.parseInt(time.substring(8, 10));
+            this.mm = time.substring(4, 7);
+            this.yyyy = Integer.parseInt(time.substring(11, 15));
+        }
         this.id = id;
         this.docName = docName;
-        this.clinicName = clinicName;
-        this.cityName = cityName;
         this.status = status;
     }
 }

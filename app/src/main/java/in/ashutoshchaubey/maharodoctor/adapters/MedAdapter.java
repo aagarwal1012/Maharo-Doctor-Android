@@ -14,10 +14,6 @@ import java.util.ArrayList;
 import in.ashutoshchaubey.maharodoctor.R;
 import in.ashutoshchaubey.maharodoctor.models.MedicineItem;
 
-/**
- * Created by ashutoshchaubey on 22/07/18.
- */
-
 public class MedAdapter extends RecyclerView.Adapter<MedAdapter.medViewHolder>{
 
     private ArrayList<MedicineItem> data;
@@ -29,7 +25,6 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.medViewHolder>{
         this.mInflater = LayoutInflater.from(context);
         this.data = data;
         this.c = context;
-        Log.e("adshgashdjbjhasdb","CNSTR");
     }
 
     @Override
@@ -41,9 +36,8 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.medViewHolder>{
     @Override
     public void onBindViewHolder(medViewHolder holder, int position) {
         holder.medName.setText(data.get(position).getMedicineName());
-        int[] dosage = data.get(position).getDosage();
-        String str = dosage[0] + "-" + dosage[1] + "-" + dosage[2] + "-" + dosage[3];
-        holder.medDosage.setText(str);
+        holder.quantity.setText(data.get(position).getQuantity());
+        holder.days.setText(data.get(position).getDays());
     }
 
     @Override
@@ -52,15 +46,15 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.medViewHolder>{
     }
 
     public class medViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView medName;
-        TextView medDosage;
+        TextView medName, quantity, days;
 
         public medViewHolder(View itemView) {
             super(itemView);
             Typeface ab = Typeface.createFromAsset(c.getAssets(), "fonts/AlexBrush.ttf");
 
-            medName = (TextView) itemView.findViewById(R.id.med_name);
-            medDosage = (TextView) itemView.findViewById(R.id.med_dosage);
+            medName = (TextView) itemView.findViewById(R.id.medicine_name);
+            quantity = (TextView) itemView.findViewById(R.id.quantity_medicine_dosage);
+            days = (TextView) itemView.findViewById(R.id.days_medicine_item);
             medName.setTypeface(ab);
             itemView.setOnClickListener(this);
         }

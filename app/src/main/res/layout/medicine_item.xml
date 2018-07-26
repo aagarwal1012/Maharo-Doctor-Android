@@ -10,21 +10,29 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/med_name"
+            android:id="@+id/medicine_name"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:textSize="22sp"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"
-            android:text="Levo Cetrizine"/>
+            />
 
         <TextView
-            android:id="@+id/med_dosage"
+            android:id="@+id/quantity_medicine_dosage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@android:color/black"
-            android:text="1-1-0-1"
+            android:paddingEnd="16dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/days_medicine_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
             android:paddingEnd="16dp"
             android:layout_marginEnd="8dp"/>
     </LinearLayout>

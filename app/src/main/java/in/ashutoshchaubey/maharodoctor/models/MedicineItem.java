@@ -1,27 +1,34 @@
 package in.ashutoshchaubey.maharodoctor.models;
 
-/**
- * Created by ashutoshchaubey on 22/07/18.
- */
-
 public class MedicineItem {
 
-    private String medicineName;
-    private int[] dosage;
+    private String medicineName, days, quantity;
     private String medicineDescription;
 
-    public MedicineItem(String name, int[] dosage, String desc){
-        medicineDescription = desc;
-        this.dosage = dosage;
-        medicineName = name;
+    public MedicineItem(String medicineName, String days, String quantity) {
+        this.medicineName = medicineName;
+        this.days = days;
+        this.quantity = quantity;
     }
 
     public String getMedicineName() {
         return medicineName;
     }
 
-    public int[] getDosage() {
-        return dosage;
+    public String getDays() {
+        return days;
+    }
+
+    public void setDays(String days) {
+        this.days = days;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getMedicineDescription() {
@@ -30,10 +37,6 @@ public class MedicineItem {
 
     public void setMedicineName(String medicineName) {
         this.medicineName = medicineName;
-    }
-
-    public void setDosage(int[] dosage) {
-        this.dosage = dosage;
     }
 
     public void setMedicineDescription(String medicineDescription) {

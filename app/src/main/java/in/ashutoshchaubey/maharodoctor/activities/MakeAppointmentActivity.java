@@ -1,27 +1,65 @@
 package in.ashutoshchaubey.maharodoctor.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.Service;
-import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import java.util.Calendar;
 
 import in.ashutoshchaubey.maharodoctor.R;
+import in.ashutoshchaubey.maharodoctor.models.getNearbyDoctors.GetNearByDoctorsInterface;
+import in.ashutoshchaubey.maharodoctor.models.getNearbyDoctors.GetNearByDoctorsOutput;
+import in.ashutoshchaubey.maharodoctor.models.requestAppointment.RequestAppointmentInterface;
+import in.ashutoshchaubey.maharodoctor.models.requestAppointment.RequestAppointmentOutput;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class MakeAppointmentActivity extends AppCompatActivity{
+import static in.ashutoshchaubey.maharodoctor.Constants.EUID;
+import static in.ashutoshchaubey.maharodoctor.Constants.SHARED_PREFERENCES;
+import static in.ashutoshchaubey.maharodoctor.Constants.USER_ID;
+import static in.ashutoshchaubey.maharodoctor.Constants.getRetrofit;
 
-    EditText date, time;
-    private int mYear, mMonth, mDay, mHour, mMinute;
+public class MakeAppointmentActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+
+    Spinner doctor;
+
+    Button confirmAppointment;
+
+    EditText date;
+    private int mYear, mMonth, mDay;
+
+    ProgressDialog progressDialog;
+
+    String uid, euid;
+
+    String[] doctorList, doctorIdList;
+
+    ArrayAdapter<String> arrayAdapter;
+
+    String selectedId;
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +70,21 @@ public class MakeAppointmentActivity extends AppCompatActivity{
         TextView toolbarText = (TextView) findViewById(R.id.toolbar);
         toolbarText.setTypeface(lobster);
 
-        final InputMethodManager imm = (InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE);
+        doctor = (Spinner) findViewById(R.id.doctor_name_spinnner);
+
+        confirmAppointment = (Button) findViewById(R.id.confirm_appointment_button);
+        confirmAppointment.setOnClickListener(this);
+
+        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        uid = sharedPreferences.getString(USER_ID, "uid");
+        euid = sharedPreferences.getString(EUID, "euid");
+
+        progressDialog = new ProgressDialog(MakeAppointmentActivity.this);
+        progressDialog.setTitle("Getting Doctors Near You");
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        final InputMethodManager imm = (InputMethodManager) this.getSystemService(Service.INPUT_METHOD_SERVICE);
 
         date = (EditText) findViewById(R.id.appointment_date);
         date.setOnClickListener(new View.OnClickListener() {
@@ -53,26 +105,26 @@ public class MakeAppointmentActivity extends AppCompatActivity{
                                                   int monthOfYear, int dayOfMonth) {
 
                                 Calendar cal = Calendar.getInstance();
-                                if(year<cal.get(Calendar.YEAR)){
+                                if (year < cal.get(Calendar.YEAR)) {
                                     dateValidityText.setVisibility(View.VISIBLE);
-                                }else {
-                                    if(year==cal.get(Calendar.YEAR)){
-                                        if(monthOfYear<cal.get(Calendar.MONTH)){
+                                } else {
+                                    if (year == cal.get(Calendar.YEAR)) {
+                                        if (monthOfYear < cal.get(Calendar.MONTH)) {
                                             dateValidityText.setVisibility(View.VISIBLE);
-                                        }else if(monthOfYear == cal.get(Calendar.MONTH)){
-                                            if(dayOfMonth<=cal.get(Calendar.DAY_OF_MONTH)){
+                                        } else if (monthOfYear == cal.get(Calendar.MONTH)) {
+                                            if (dayOfMonth <= cal.get(Calendar.DAY_OF_MONTH)) {
                                                 dateValidityText.setVisibility(View.VISIBLE);
-                                            }else{
+                                            } else {
                                                 dateValidityText.setVisibility(View.GONE);
                                             }
-                                        }else{
+                                        } else {
                                             dateValidityText.setVisibility(View.GONE);
                                         }
-                                    }else{
+                                    } else {
                                         dateValidityText.setVisibility(View.GONE);
                                     }
                                 }
-                                imm.hideSoftInputFromWindow(date.getWindowToken(),0);
+                                imm.hideSoftInputFromWindow(date.getWindowToken(), 0);
                                 date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
                             }
@@ -80,39 +132,43 @@ public class MakeAppointmentActivity extends AppCompatActivity{
                 datePickerDialog.show();
             }
         });
-        time = (EditText) findViewById(R.id.appointment_time);
-        time.setOnClickListener(new View.OnClickListener() {
+
+        GetNearByDoctorsInterface getNearByDoctorsInterface = getRetrofit().create(GetNearByDoctorsInterface.class);
+        Call<GetNearByDoctorsOutput> call = getNearByDoctorsInterface.getResult(euid);
+        call.enqueue(new Callback<GetNearByDoctorsOutput>() {
             @Override
-            public void onClick(View view) {
-                final Calendar c = Calendar.getInstance();
-                mHour = c.get(Calendar.HOUR_OF_DAY);
-                mMinute = c.get(Calendar.MINUTE);
+            public void onResponse(Call<GetNearByDoctorsOutput> call, Response<GetNearByDoctorsOutput> response) {
+                Log.d("Getting Doctor --> ", "Status : " + response.body().getStatus());
+                if (response.body().getStatus().equals("ok")) {
+                    GetNearByDoctorsOutput getNearByDoctorsOutput = response.body();
 
-                final TextView timeValidityText = (TextView) findViewById(R.id.time_warning);
-                Calendar cal = Calendar.getInstance();
-                // Launch Time Picker Dialog
-                TimePickerDialog timePickerDialog = new TimePickerDialog(MakeAppointmentActivity.this,
-                        new TimePickerDialog.OnTimeSetListener() {
+                    int length = getNearByDoctorsOutput.getList().length;
 
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
+                    doctorList = new String[length];
+                    doctorIdList = new String[length];
 
+                    for (int i = 0; i < length; i++) {
+                        doctorList[i] = getNearByDoctorsOutput.getList()[i].getName();
+                        doctorIdList[i] = getNearByDoctorsOutput.getList()[i].getUid();
+                    }
 
-                                if(hourOfDay<9){
-                                    timeValidityText.setVisibility(View.VISIBLE);
-                                }else if(hourOfDay>=21){
-                                    timeValidityText.setVisibility(View.VISIBLE);
-                                }else{
-                                    timeValidityText.setVisibility(View.GONE);
-                                }
-                                imm.hideSoftInputFromWindow(time.getWindowToken(),0);
-                                time.setText(hourOfDay + ":" + minute);
-                            }
-                        }, mHour, mMinute, false);
-                timePickerDialog.show();
+                    arrayAdapter = new ArrayAdapter<String>(MakeAppointmentActivity.this, android.R.layout.simple_spinner_dropdown_item, doctorList);
+                    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    doctor.setAdapter(arrayAdapter);
+                    doctor.setOnItemSelectedListener(MakeAppointmentActivity.this);
+                    if (doctorIdList != null){
+                        selectedId = doctorIdList[0];
+                    }
+                }
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<GetNearByDoctorsOutput> call, Throwable t) {
+                Log.e("Error : ", t.toString());
             }
         });
+
 
     }
 
@@ -127,4 +183,55 @@ public class MakeAppointmentActivity extends AppCompatActivity{
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.confirm_appointment_button) {
+            progressDialog.setTitle("Confirming Appointment");
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+
+            RequestAppointmentInterface requestAppointmentInterface = getRetrofit().create(RequestAppointmentInterface.class);
+            Call<RequestAppointmentOutput> call1 = requestAppointmentInterface.getResult(euid, selectedId, date.getText().toString(), uid);
+            call1.enqueue(new Callback<RequestAppointmentOutput>() {
+                @Override
+                public void onResponse(Call<RequestAppointmentOutput> call, Response<RequestAppointmentOutput> response) {
+                    Log.d("Confirm Appt --> ", "Status : " + response.body().getStatus());
+                    progressDialog.dismiss();
+                    if (response.body().getStatus().equals("ok")) {
+                        AlertDialog.Builder builder;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            builder = new AlertDialog.Builder(MakeAppointmentActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+                        } else {
+                            builder = new AlertDialog.Builder(MakeAppointmentActivity.this);
+                        }
+                        builder.setTitle("Request Id")
+                                .setMessage("Please note down the request id : " + response.body().getRequest_id())
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(MakeAppointmentActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .show();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<RequestAppointmentOutput> call, Throwable t) {
+                    Log.e("Error : ", t.toString());
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        selectedId = doctorIdList[i];
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

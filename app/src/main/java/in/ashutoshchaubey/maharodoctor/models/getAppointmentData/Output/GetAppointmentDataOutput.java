@@ -4,8 +4,16 @@ public class GetAppointmentDataOutput {
 
     String status;
     String message;
-    //TODO : "DATA"
+    AppointmentData[] data;
 
+
+    public AppointmentData[] getData() {
+        return data;
+    }
+
+    public void setData(AppointmentData[] data) {
+        this.data = data;
+    }
 
     public GetAppointmentDataOutput(String status, String message) {
         this.status = status;

@@ -53,13 +53,6 @@
             android:text="Dr. Kailash Verma"
             android:textSize="18sp"
             android:textColor="#ee000000"/>
-        <TextView
-            android:id="@+id/clin_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Barbara Eye Care Center, Jaipur"
-            android:textSize="12sp"
-            android:textColor="#ee000000"/>
     </LinearLayout>
 
     <View

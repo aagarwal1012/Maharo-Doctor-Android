@@ -40,16 +40,21 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     @Override
     public void onBindViewHolder(AppointmentAdapter.appointViewHolder holder, int position) {
-        holder.date.setText(data.get(position).getDd() +" "+ months[data.get(position).getMm()-1] +", "+ data.get(position).getYyyy());
-        holder.time.setText(data.get(position).getHour()+":"+data.get(position).getMinute()+" hrs");
+        if (data.get(position).getMm() != null){
+            holder.date.setText(data.get(position).getDd() +" "+ data.get(position).getMm() +", "+ data.get(position).getYyyy());
+            holder.time.setText(data.get(position).getHour()+":"+data.get(position).getMinute()+" hrs");
+        }
+        else {
+            holder.date.setText("None");
+            holder.time.setText("None");
+        }
         holder.docName.setText(data.get(position).getDocName());
-        holder.clinic.setText(data.get(position).getClinicName()+", "+data.get(position).getCityName());
         holder.status.setText(data.get(position).getStatus());
         if (data.get(position).getStatus().equals("Pending")){
             holder.status.setBackgroundColor(Color.parseColor("#FFEE58"));
-        }else if(data.get(position).getStatus().equals("Approved")){
+        }else if(data.get(position).getStatus().equals("Verified")){
             holder.status.setBackgroundColor(Color.parseColor("#76FF03"));
-        }else if (data.get(position).getStatus().equals("Not Approved")){
+        }else if (data.get(position).getStatus().equals("Not Verified")){
             holder.status.setBackgroundColor(Color.parseColor("#EF5350"));
         }else{
             holder.status.setBackgroundColor(Color.parseColor("#26C6DA"));
@@ -72,7 +77,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             time = (TextView) itemView.findViewById(R.id.appointment_time);
             status = (TextView) itemView.findViewById(R.id.status);
             docName = (TextView) itemView.findViewById(R.id.doc_name);
-            clinic = (TextView) itemView.findViewById(R.id.clin_name);
 
             itemView.setOnClickListener(this);
         }
