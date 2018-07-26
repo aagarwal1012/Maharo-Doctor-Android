@@ -15,7 +15,7 @@ public interface SignUpInterface {
             @Query("mobile") String mobile,
             @Query("email") String email,
             @Query("name") String name,
-            @Query("aadhaar") String aadhaarNumber,
+            @Query("aadhar") String aadhaarNumber,
             @Query("district") String district
             );
 

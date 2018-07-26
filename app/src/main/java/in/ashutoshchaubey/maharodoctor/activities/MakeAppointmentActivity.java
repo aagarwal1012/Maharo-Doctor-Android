@@ -156,8 +156,13 @@ public class MakeAppointmentActivity extends AppCompatActivity implements View.O
                     arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     doctor.setAdapter(arrayAdapter);
                     doctor.setOnItemSelectedListener(MakeAppointmentActivity.this);
-                    if (doctorIdList != null){
-                        selectedId = doctorIdList[0];
+                    if (doctorIdList != null ){
+                        try{
+                            selectedId = doctorIdList[0];
+                        }
+                        catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 }
                 progressDialog.dismiss();

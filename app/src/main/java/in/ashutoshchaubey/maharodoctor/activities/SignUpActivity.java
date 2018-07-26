@@ -81,7 +81,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
                     progressDialog.show();
 
                     SignUpInterface signUpInterface = getRetrofit().create(SignUpInterface.class);
-                    Call<SignUpOutput> call = signUpInterface.getResult(username.getText().toString(), password.getText().toString(), 0, mobileNumber.getText().toString(), email.getText().toString(), name.getText().toString(), aadhaarNumber.getText().toString(), "");
+                    Call<SignUpOutput> call = signUpInterface.getResult(username.getText().toString(), password.getText().toString(), 0, mobileNumber.getText().toString(), email.getText().toString(), name.getText().toString(), aadhaarNumber.getText().toString(), districtName);
                     call.enqueue(new Callback<SignUpOutput>() {
                         @Override
                         public void onResponse(Call<SignUpOutput> call, Response<SignUpOutput> response) {
