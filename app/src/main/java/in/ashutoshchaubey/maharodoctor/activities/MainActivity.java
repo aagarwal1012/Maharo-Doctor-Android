@@ -165,12 +165,12 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
                     verified.setText(ver + "");
                     notVerified.setText(not_ver + "");
                     history.setText(length + " Appointments");
-                    if (getAppointmentDataOutput.getData()[length - 1].getInfo() != null) {
+                    if (length != 0 && getAppointmentDataOutput.getData()[length - 1].getInfo() != null) {
                         prescription.setText(getAppointmentDataOutput.getData()[length - 1].getInfo().getMedicines().length + " Total");
                     } else {
                         prescription.setText("No Information Available");
                     }
-                    if (getAppointmentDataOutput.getData()[length - 1].getCompleted() == 1) {
+                    if (length != 0 && getAppointmentDataOutput.getData()[length - 1].getCompleted() == 1) {
                         current.setText("Completed");
                     } else {
                         current.setText("Not Completed");
