@@ -7,6 +7,18 @@
     android:background="@android:color/white"
     tools:context="in.ashutoshchaubey.maharodoctor.activities.MainActivity">
 
+    <Button
+        android:id="@+id/emergency_button"
+        android:layout_margin="8dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Emergency"
+        android:background="@drawable/red_button_bg"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:padding="8dp"
+        android:textAllCaps="false" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image_main_activity"

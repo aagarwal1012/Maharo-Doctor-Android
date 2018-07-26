@@ -1,20 +1,26 @@
 package in.ashutoshchaubey.maharodoctor.activities;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.ashutoshchaubey.maharodoctor.R;
+import in.ashutoshchaubey.maharodoctor.models.emergency.PanicInterface;
+import in.ashutoshchaubey.maharodoctor.models.emergency.PanicOutput;
 import in.ashutoshchaubey.maharodoctor.models.getAppointmentData.Output.GetAppointmentDataInterface;
 import in.ashutoshchaubey.maharodoctor.models.getAppointmentData.Output.GetAppointmentDataOutput;
 import in.ashutoshchaubey.maharodoctor.models.getName.GetNameInterface;
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
 
     CircleImageView profilePic;
 
+    Button emergency_button;
+
     TextView todayDate, name, verified, notVerified, current, prescription, history;
 
     ProgressDialog progressDialog;
@@ -47,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        emergency_button = (Button) findViewById(R.id.emergency_button);
+        emergency_button.setOnClickListener(this);
 
         name = (TextView) findViewById(R.id.first_name_main_activity);
         name.addTextChangedListener(this);
@@ -66,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
         profilePic = (CircleImageView) findViewById(R.id.profile_image_main_activity);
         profilePic.setOnClickListener(this);
 
-        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES , Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
         uid = sharedPreferences.getString(USER_ID, "uid");
         euid = sharedPreferences.getString(EUID, "euid");
 
@@ -105,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
         findViewById(R.id.pricing_linear_layout_main_activity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_LONG);
+                Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_SHORT);
             }
         });
 
@@ -119,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
         call.enqueue(new Callback<GetNameOutput>() {
             @Override
             public void onResponse(Call<GetNameOutput> call, Response<GetNameOutput> response) {
-                Log.d("Response Get Name --> " , "Status : " + response.body().getStatus() );
+                Log.d("Response Get Name --> ", "Status : " + response.body().getStatus());
 
                 if (response.body().getStatus().equals("ok")) {
                     GetNameOutput getNameOutput = response.body();
@@ -129,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
 
             @Override
             public void onFailure(Call<GetNameOutput> call, Throwable t) {
-                Log.e("Error : ", t.toString() );
+                Log.e("Error : ", t.toString());
             }
         });
 
@@ -138,33 +149,30 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
         call1.enqueue(new Callback<GetAppointmentDataOutput>() {
             @Override
             public void onResponse(Call<GetAppointmentDataOutput> call, Response<GetAppointmentDataOutput> response) {
-                Log.d("Response Get Name --> " , "Status : " + response.body().getStatus() );
+                Log.d("Response Get Name --> ", "Status : " + response.body().getStatus());
 
                 if (response.body().getStatus().equals("ok")) {
                     getAppointmentDataOutput = response.body();
                     int ver = 0, not_ver = 0;
                     int length = getAppointmentDataOutput.getData().length;
-                    for (int i = 0; i < length; i++){
-                        if (getAppointmentDataOutput.getData()[i].getVerified() == 1 ){
+                    for (int i = 0; i < length; i++) {
+                        if (getAppointmentDataOutput.getData()[i].getVerified() == 1) {
                             ver++;
-                        }
-                        else {
+                        } else {
                             not_ver++;
                         }
                     }
-                    verified.setText(ver+"");
+                    verified.setText(ver + "");
                     notVerified.setText(not_ver + "");
                     history.setText(length + " Appointments");
-                    if (getAppointmentDataOutput.getData()[length - 1].getInfo() != null){
+                    if (getAppointmentDataOutput.getData()[length - 1].getInfo() != null) {
                         prescription.setText(getAppointmentDataOutput.getData()[length - 1].getInfo().getMedicines().length + " Total");
-                    }
-                    else {
+                    } else {
                         prescription.setText("No Information Available");
                     }
-                    if (getAppointmentDataOutput.getData()[length - 1].getCompleted() == 1){
+                    if (getAppointmentDataOutput.getData()[length - 1].getCompleted() == 1) {
                         current.setText("Completed");
-                    }
-                    else{
+                    } else {
                         current.setText("Not Completed");
                     }
                 }
@@ -172,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
 
             @Override
             public void onFailure(Call<GetAppointmentDataOutput> call, Throwable t) {
-                Log.e("Error : ", t.toString() );
+                Log.e("Error : ", t.toString());
             }
         });
     }
@@ -187,15 +195,54 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
 
     @Override
     public void afterTextChanged(Editable editable) {
-        if (name.getText() != null && verified.getText() != null && notVerified.getText() != null && current.getText() != null && prescription.getText() != null && history.getText() != null){
+        if (name.getText() != null && verified.getText() != null && notVerified.getText() != null && current.getText() != null && prescription.getText() != null && history.getText() != null) {
             progressDialog.dismiss();
         }
     }
 
     @Override
     public void onClick(View view) {
-     if (view.getId() == R.id.profile_image_main_activity){
-         startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-     }
+        if (view.getId() == R.id.profile_image_main_activity) {
+            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+        } else if (view.getId() == R.id.emergency_button) {
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(MainActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+            } else {
+                builder = new AlertDialog.Builder(MainActivity.this);
+            }
+            builder.setTitle("Request Id")
+                    .setMessage("Are you sure its an Emergency!")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            progressDialog.setTitle("Getting a Ambulance");
+                            progressDialog.setMessage("Loading...");
+                            progressDialog.show();
+
+                            PanicInterface panicInterface = getRetrofit().create(PanicInterface.class);
+                            Call<PanicOutput> call2 = panicInterface.getResult(euid, uid);
+                            call2.enqueue(new Callback<PanicOutput>() {
+                                @Override
+                                public void onResponse(Call<PanicOutput> call, Response<PanicOutput> response) {
+                                    if (response.body().getStatus().equals("ok")){
+                                        progressDialog.dismiss();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<PanicOutput> call, Throwable t) {
+                                    Log.e("Error : ", t.toString());
+                                }
+                            });
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    })
+                    .show();
+        }
     }
 }
