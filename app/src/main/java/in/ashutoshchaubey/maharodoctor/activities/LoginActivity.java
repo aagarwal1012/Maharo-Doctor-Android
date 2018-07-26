@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (response.body().getStatus().equals("ok")) {
                             OutputLogin outputLogin = response.body();
 
-                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG);
+                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
 
                             sharedPreferences.edit().putBoolean(IS_LOGGED_IN, true).commit();
                             sharedPreferences.edit().putString(USER_ID, userName.getText().toString()).commit();
@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
                         } else {
-                            Toast.makeText(LoginActivity.this, "Username or password are invalid", Toast.LENGTH_LONG);
+                            Toast.makeText(LoginActivity.this, "Username or password are invalid", Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
 
             } else {
-                Toast.makeText(LoginActivity.this, "Make Sure that you fill all the fields correctly", Toast.LENGTH_LONG);
+                Toast.makeText(LoginActivity.this, "Make Sure that you fill all the fields correctly", Toast.LENGTH_LONG).show();
             }
         }
     }

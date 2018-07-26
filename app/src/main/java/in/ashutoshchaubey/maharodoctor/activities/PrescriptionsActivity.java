@@ -65,51 +65,58 @@ public class PrescriptionsActivity extends AppCompatActivity implements MedAdapt
 
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
         euid = sharedPreferences.getString(EUID, "euid");
-        app_id = getIntent().getExtras().getString(APPOINMENT_ID).toString();
+        try {
+            app_id = getIntent().getExtras().getString(APPOINMENT_ID).toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        progressDialog = new ProgressDialog(PrescriptionsActivity.this);
-        progressDialog.setTitle("Getting Data");
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        if (app_id != null) {
 
-        GetSingleAppointmentDataInterface getSingleAppointmentDataInterface = getRetrofit().create(GetSingleAppointmentDataInterface.class);
-        Call<GetSingleAppointmentDataOutput> call = getSingleAppointmentDataInterface.getResult(euid, app_id);
-        call.enqueue(new Callback<GetSingleAppointmentDataOutput>() {
-            @Override
-            public void onResponse(Call<GetSingleAppointmentDataOutput> call, Response<GetSingleAppointmentDataOutput> response) {
-                Log.d("Get APP Data --> ", "Status : " + response.body().getStatus());
+            progressDialog = new ProgressDialog(PrescriptionsActivity.this);
+            progressDialog.setTitle("Getting Data");
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
 
-                if (response.body().getStatus().equals("ok")) {
-                    GetSingleAppointmentDataOutput getSingleAppointmentDataOutput = response.body();
+            GetSingleAppointmentDataInterface getSingleAppointmentDataInterface = getRetrofit().create(GetSingleAppointmentDataInterface.class);
+            Call<GetSingleAppointmentDataOutput> call = getSingleAppointmentDataInterface.getResult(euid, app_id);
+            call.enqueue(new Callback<GetSingleAppointmentDataOutput>() {
+                @Override
+                public void onResponse(Call<GetSingleAppointmentDataOutput> call, Response<GetSingleAppointmentDataOutput> response) {
+                    Log.d("Get APP Data --> ", "Status : " + response.body().getStatus());
 
-                    remarks.setText(getSingleAppointmentDataOutput.getData().getInfo().getRemarks());
+                    if (response.body().getStatus().equals("ok")) {
+                        GetSingleAppointmentDataOutput getSingleAppointmentDataOutput = response.body();
 
-                    if (getSingleAppointmentDataOutput.getData().getInfo().getMedicines() != null) {
-                        int length = getSingleAppointmentDataOutput.getData().getInfo().getMedicines().length;
-                        for (int i = 0; i < length; i++) {
-                            data.add(
-                                    new MedicineItem(
-                                            getSingleAppointmentDataOutput.getData().getInfo().getMedicines()[i].getName(),
-                                            getSingleAppointmentDataOutput.getData().getInfo().getMedicines()[i].getDays() + " Days",
-                                            getSingleAppointmentDataOutput.getData().getInfo().getMedicines()[i].getQuantity() + " Quantity"
-                                    )
-                            );
+                        remarks.setText(getSingleAppointmentDataOutput.getData().getInfo().getRemarks());
 
-                            adapter = new MedAdapter(PrescriptionsActivity.this, data);
-                            adapter.setClickListener(PrescriptionsActivity.this);
-                            medsRecyclerView.setAdapter(adapter);
+                        if (getSingleAppointmentDataOutput.getData().getInfo().getMedicines() != null) {
+                            int length = getSingleAppointmentDataOutput.getData().getInfo().getMedicines().length;
+                            for (int i = 0; i < length; i++) {
+                                data.add(
+                                        new MedicineItem(
+                                                getSingleAppointmentDataOutput.getData().getInfo().getMedicines()[i].getName(),
+                                                getSingleAppointmentDataOutput.getData().getInfo().getMedicines()[i].getDays() + " Days",
+                                                getSingleAppointmentDataOutput.getData().getInfo().getMedicines()[i].getQuantity() + " Quantity"
+                                        )
+                                );
+
+                                adapter = new MedAdapter(PrescriptionsActivity.this, data);
+                                adapter.setClickListener(PrescriptionsActivity.this);
+                                medsRecyclerView.setAdapter(adapter);
+                            }
                         }
+
+                        progressDialog.dismiss();
                     }
-
-                    progressDialog.dismiss();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<GetSingleAppointmentDataOutput> call, Throwable t) {
-                Log.e("Error : ", t.toString());
-            }
-        });
+                @Override
+                public void onFailure(Call<GetSingleAppointmentDataOutput> call, Throwable t) {
+                    Log.e("Error : ", t.toString());
+                }
+            });
+        }
 
     }
 

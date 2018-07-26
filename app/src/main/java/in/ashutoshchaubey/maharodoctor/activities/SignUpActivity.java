@@ -107,7 +107,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
 
 
                             } else {
-                                Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_LONG);
+                                Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
 
@@ -117,10 +117,10 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
                         }
                     });
                 } else {
-                    Toast.makeText(SignUpActivity.this, "Retype password not matches with password", Toast.LENGTH_LONG);
+                    Toast.makeText(SignUpActivity.this, "Retype password not matches with password", Toast.LENGTH_LONG).show();
                 }
             } else {
-                Toast.makeText(SignUpActivity.this, "Make Sure that you fill all the fields correctly", Toast.LENGTH_LONG);
+                Toast.makeText(SignUpActivity.this, "Make Sure that you fill all the fields correctly", Toast.LENGTH_LONG).show();
             }
         }
     }

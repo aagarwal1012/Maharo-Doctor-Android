@@ -56,56 +56,63 @@ public class CurrentStatusActivity extends AppCompatActivity implements View.OnC
 
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
         euid = sharedPreferences.getString(EUID, "euid");
-        app_id = getIntent().getExtras().getString(APPOINMENT_ID).toString();
+        try {
+            app_id = getIntent().getExtras().getString(APPOINMENT_ID).toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        progressDialog = new ProgressDialog(CurrentStatusActivity.this);
-        progressDialog.setTitle("Getting Data");
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        if (app_id != null) {
 
-        GetSingleAppointmentDataInterface getSingleAppointmentDataInterface = getRetrofit().create(GetSingleAppointmentDataInterface.class);
-        Call<GetSingleAppointmentDataOutput> call = getSingleAppointmentDataInterface.getResult(euid, app_id);
-        call.enqueue(new Callback<GetSingleAppointmentDataOutput>() {
-            @Override
-            public void onResponse(Call<GetSingleAppointmentDataOutput> call, Response<GetSingleAppointmentDataOutput> response) {
-                Log.d("Get APP Data --> ", "Status : " + response.body().getStatus());
+            progressDialog = new ProgressDialog(CurrentStatusActivity.this);
+            progressDialog.setTitle("Getting Data");
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
 
-                if (response.body().getStatus().equals("ok")) {
-                    GetSingleAppointmentDataOutput getSingleAppointmentDataOutput = response.body();
+            GetSingleAppointmentDataInterface getSingleAppointmentDataInterface = getRetrofit().create(GetSingleAppointmentDataInterface.class);
+            Call<GetSingleAppointmentDataOutput> call = getSingleAppointmentDataInterface.getResult(euid, app_id);
+            call.enqueue(new Callback<GetSingleAppointmentDataOutput>() {
+                @Override
+                public void onResponse(Call<GetSingleAppointmentDataOutput> call, Response<GetSingleAppointmentDataOutput> response) {
+                    Log.d("Get APP Data --> ", "Status : " + response.body().getStatus());
 
-                    if (getSingleAppointmentDataOutput.getData().getVerified() == 1 && getSingleAppointmentDataOutput.getData().getCompleted() == 0) {
-                        status.setBackgroundColor(Color.parseColor("#76FF03"));
-                        status.setText("Verified");
-                    } else if (getSingleAppointmentDataOutput.getData().getVerified() == 0) {
-                        status.setText("Not Verified");
-                        status.setBackgroundColor(Color.parseColor("#EF5350"));
-                    } else if (getSingleAppointmentDataOutput.getData().getCompleted() == 1) {
-                        status.setBackgroundColor(Color.parseColor("#26C6DA"));
-                        status.setText("Completed");
+                    if (response.body().getStatus().equals("ok")) {
+                        GetSingleAppointmentDataOutput getSingleAppointmentDataOutput = response.body();
+
+                        if (getSingleAppointmentDataOutput.getData().getVerified() == 1 && getSingleAppointmentDataOutput.getData().getCompleted() == 0) {
+                            status.setBackgroundColor(Color.parseColor("#76FF03"));
+                            status.setText("Verified");
+                        } else if (getSingleAppointmentDataOutput.getData().getVerified() == 0) {
+                            status.setText("Not Verified");
+                            status.setBackgroundColor(Color.parseColor("#EF5350"));
+                        } else if (getSingleAppointmentDataOutput.getData().getCompleted() == 1) {
+                            status.setBackgroundColor(Color.parseColor("#26C6DA"));
+                            status.setText("Completed");
+                        }
+
+                        doctorName.setText("Dr. " + getSingleAppointmentDataOutput.getData().getName());
+
+                        appointmentId.setText(app_id);
+
+                        if (getSingleAppointmentDataOutput.getData().getTime() != null) {
+                            time.setText(getSingleAppointmentDataOutput.getData().getTime());
+                        }
+                        remarks.setText(getSingleAppointmentDataOutput.getData().getInfo().getRemarks());
+
+                        if (getSingleAppointmentDataOutput.getData().getInfo().getMedicines() == null) {
+                            prescriptionButton.setVisibility(View.GONE);
+                        }
+
+                        progressDialog.dismiss();
                     }
-
-                    doctorName.setText("Dr. " + getSingleAppointmentDataOutput.getData().getName());
-
-                    appointmentId.setText(app_id);
-
-                    if (getSingleAppointmentDataOutput.getData().getTime() != null) {
-                        time.setText(getSingleAppointmentDataOutput.getData().getTime());
-                    }
-                    remarks.setText(getSingleAppointmentDataOutput.getData().getInfo().getRemarks());
-
-                    if (getSingleAppointmentDataOutput.getData().getInfo().getMedicines() == null) {
-                        prescriptionButton.setVisibility(View.GONE);
-                    }
-
-                    progressDialog.dismiss();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<GetSingleAppointmentDataOutput> call, Throwable t) {
-                Log.e("Error : ", t.toString());
-            }
-        });
+                @Override
+                public void onFailure(Call<GetSingleAppointmentDataOutput> call, Throwable t) {
+                    Log.e("Error : ", t.toString());
+                }
+            });
+        }
     }
 
     @Override

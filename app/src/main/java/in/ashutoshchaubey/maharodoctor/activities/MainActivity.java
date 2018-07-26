@@ -92,7 +92,9 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PrescriptionsActivity.class);
-                intent.putExtra(APPOINMENT_ID, getAppointmentDataOutput.getData()[getAppointmentDataOutput.getData().length - 1].getIdsitings() + "");
+                if (getAppointmentDataOutput.getData().length != 0){
+                    intent.putExtra(APPOINMENT_ID, getAppointmentDataOutput.getData()[getAppointmentDataOutput.getData().length - 1].getIdsitings() + "");
+                }
                 startActivity(intent);
             }
         });
@@ -101,7 +103,9 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CurrentStatusActivity.class);
-                intent.putExtra(APPOINMENT_ID, getAppointmentDataOutput.getData()[getAppointmentDataOutput.getData().length - 1].getIdsitings() + "");
+                if (getAppointmentDataOutput.getData().length != 0){
+                    intent.putExtra(APPOINMENT_ID, getAppointmentDataOutput.getData()[getAppointmentDataOutput.getData().length - 1].getIdsitings() + "");
+                }
                 startActivity(intent);
             }
         });
@@ -116,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, View
         findViewById(R.id.pricing_linear_layout_main_activity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_SHORT);
+                Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_LONG).show();
             }
         });
 

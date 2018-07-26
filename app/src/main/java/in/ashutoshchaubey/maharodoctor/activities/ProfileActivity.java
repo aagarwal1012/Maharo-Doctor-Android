@@ -18,7 +18,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static in.ashutoshchaubey.maharodoctor.Constants.APPOINMENT_ID;
 import static in.ashutoshchaubey.maharodoctor.Constants.EUID;
 import static in.ashutoshchaubey.maharodoctor.Constants.SHARED_PREFERENCES;
 import static in.ashutoshchaubey.maharodoctor.Constants.USER_ID;
@@ -26,7 +25,7 @@ import static in.ashutoshchaubey.maharodoctor.Constants.getRetrofit;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView name, aadhaar, mobileNumber, district;
+    TextView name, aadhaar, mobileNumber, district, email;
 
     ProgressDialog progressDialog;
 
@@ -41,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        email = (TextView) findViewById(R.id.email_profile);
         name = (TextView) findViewById(R.id.name_profile);
         aadhaar = (TextView) findViewById(R.id.aadhaar_profile);
         mobileNumber = (TextView) findViewById(R.id.mobile_number_profile);
@@ -69,10 +69,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     ProfileOutput profileOutput = response.body();
 
                     name.setText(profileOutput.getContact().getName());
-                    aadhaar.setText(profileOutput.getContact().getAadhaar());
+                    aadhaar.setText(profileOutput.getContact().getAadhar());
                     mobileNumber.setText(profileOutput.getContact().getMobile());
                     district.setText(profileOutput.getContact().getDistrict());
-
+                    email.setText(profileOutput.getContact().getEmail());
                     progressDialog.dismiss();
 
                 }

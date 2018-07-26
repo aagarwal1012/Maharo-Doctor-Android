@@ -2,7 +2,7 @@ package in.ashutoshchaubey.maharodoctor.models.profile;
 
 public class Contact {
 
-    String mobile, email, aadhaar, district, name;
+    String mobile, email, aadhar, district, name;
 
     public String getName() {
         return name;
@@ -28,12 +28,12 @@ public class Contact {
         this.email = email;
     }
 
-    public String getAadhaar() {
-        return aadhaar;
+    public String getAadhar() {
+        return aadhar;
     }
 
-    public void setAadhaar(String aadhaar) {
-        this.aadhaar = aadhaar;
+    public void setAadhar(String aadhar) {
+        this.aadhar = aadhar;
     }
 
     public String getDistrict() {

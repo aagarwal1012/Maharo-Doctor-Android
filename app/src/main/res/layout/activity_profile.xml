@@ -128,7 +128,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="email id" />
+                        android:text="Email" />
 
                     <TextView
                         android:id="@+id/email_profile"
